@@ -2,6 +2,7 @@ from pyspark.sql.functions import struct, lit, col, array, when, isnull, filter,
     collect_list
 
 
+# lit -> PySpark SQL functions lit() and typedLit() are used to add a new column to DataFrame by assigning a literal or constant value.
 def get_insert_operation(column, alias):
     return struct(lit("INSERT").alias("operation"),
                   column.alias("newValue"),

@@ -174,7 +174,7 @@ def expected_final_df(spark):
 
 def test_blank_test(spark):
     print(spark.version)
-    assert spark.version == "3.3.0"
+    assert spark.version == "3.5.1"
 
 
 def test_get_config():
@@ -184,11 +184,13 @@ def test_get_config():
     assert conf_qa["hive.database"] == "sbdl_db_qa"
 
 
+# here spark is a spark fixture function def spark():
 def test_read_accounts(spark):
     accounts_df = DataLoader.read_accounts(spark, "LOCAL", False, None)
     assert accounts_df.count() == 8
 
-
+# collect() will to bring all the rows back to python list
+# expected_party_rows is a test fixture
 def test_read_parties_row(spark, expected_party_rows):
     actual_party_rows = DataLoader.read_parties(spark, "LOCAL", False, None).collect()
     assert expected_party_rows == actual_party_rows
